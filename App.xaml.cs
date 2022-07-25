@@ -10,7 +10,7 @@ namespace ERPViewer
 {
     /// <summary>
     /// App.xaml 的交互逻辑
-    /// add commit line1
+    /// add commit line1 && line2
     /// </summary>
     public partial class App : Application
     {
