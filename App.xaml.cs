@@ -14,5 +14,6 @@ namespace ERPViewer
     /// </summary>
     public partial class App : Application
     {
+		//add line1
     }
 }
