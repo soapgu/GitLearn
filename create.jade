@@ -1,0 +1,78 @@
+//
+   Created by kpin on 2015/5/19.
+
+extends ../layout
+block content
+  div.col-sm-12
+    include guideHeader
+    div.row.guideFooter
+      button.btn.btn-default(onclick="forward('/meeting/secretary')") 上一步
+      //2017-06-20 zf start
+      //button.btn.btn-default(style="float:right",onclick="save(#{type})") 下一步
+      button.btn.btn-default(style="float:right",onclick="save('#{user.password}')") 下一步
+      //2017-06-20 zf end
+    div.row.guideContainer
+      div.col-sm-offset-3.col-sm-6.minHeight2
+        form(role='form',style="margin-top:23%")
+          div.form-group(style='margin-bottom:30px')
+              if(user.password =="admin")
+                div.input-group
+                  //span.input-group-addon  类&nbsp;&nbsp;&nbsp;型
+                  span.input-group-addon  会议类型
+                  select.form-control(onchange='selectType(this)')
+                    option(value='0') 常委会议
+                    //option(value='1') 审委会议
+                    //option(value='2') 常委会议
+              else if (user.password =="user")
+                  div.input-group
+                      span.input-group-addon 会议类型
+                      select.form-control(onchange='selectType(this)')
+                          option(value='1') 审委会议
+                          //option(value='1') 审委会议
+                          //option(value='2') 常委会议
+
+            //br
+
+          div.form-group(style='margin-bottom:30px')
+            div.input-group
+              span.input-group-addon 名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称
+              if (meeting)
+                input.form-control#meetingname(type="text", value="#{meeting.name}", placeholder="例：关于***的会议")
+              else
+                input.form-control#meetingname(type="text", placeholder="例：关于***的会议")
+          //div.form-group(style='margin-bottom:30px')
+          //  div.input-group
+          //    span.input-group-addon 汇报人
+          //    if (meeting)
+          //      input.form-control#meetingreporter(type="text", value="#{meeting.reporter}", placeholder="例：张三")
+          //    else
+          //      input.form-control#meetingreporter(type="text",placeholder="例：张三")
+          div.form-group(style='margin-bottom:30px')
+            div.input-group.date#DTChk('data-dateformat'="yyyy-mm-dd HH:ii")
+              span.input-group-addon 时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间
+              if (meeting)
+                div#meetingid(style = 'display:none')= meeting.id
+                input.form-control#meetingtime(type="text", value="#{meeting.starttime}", readonly="readonly")
+              else
+                input.form-control#meetingtime(type="text", readonly="readonly")
+              span.input-group-addon
+                span.glyphicon.glyphicon-calendar
+          //div.form-group
+            div.input-group
+              span.input-group-addon 会议室
+              select.form-control
+                option(value='0') -请选择-
+                option(value='1') 第一会议室
+                option(value='2') 第二会议室
+                option(value='1') 第三会议室
+                option(value='2') 第四会议室
+                option(value='2') 第五会议室
+
+block script
+  link(type="text/css",href='/css/bootstrap-datetimepicker.min.css',rel='stylesheet')
+  script(src="/js/bootstrap-datetimepicker.min.js",type="text/javascript")
+  script(src="/js/meetingModel/create.js",type="text/javascript")
+  script(src='/js/bootstrap-datetimepicker.zh-CN.js',type='text/javascript' )
+  script(src="/js/moment.js",type="text/javascript")
+
+
